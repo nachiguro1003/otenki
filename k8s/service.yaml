@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: otenki-app
+  labels:
+    app: otenki-app
+spec:
+  selector:
+    app: otenki-app
+  ports:
+    - name: http
+      port: 80
+  type: NodePort
