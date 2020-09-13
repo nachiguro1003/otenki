@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: gcr.io/otenki-289014/portfolio-backend-nginx:latest
+          image: gcr.io/otenki-289014/portfolio-backend-nginx
           imagePullPolicy: Always
           ports:
             - containerPort: 80

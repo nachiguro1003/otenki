@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otenki-servicer
+  labels:
+    app: otenki-servicer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otenki-servicer
+  template:
+    metadata:
+      labels:
+        app: otenki-servicer
+    spec:
+      containers:
+        - name: otenki-servicer
+          image: gcr.io/otenki-289014/otenki-servicer
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8001
+          resources:
+            limits:
+              cpu: "1"
+            requests:
+              cpu: 50m

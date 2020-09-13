@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"encoding/csv"
 	"github.com/labstack/echo"
 	"github.com/nachiguro1003/otenki/src/servicer/app/api"
+	"log"
 	"strconv"
+	"time"
 
 	//"github.com/nachiguro1003/otenki/src/servicer/app/api"
 	"github.com/nachiguro1003/otenki/src/servicer/frame"
@@ -48,21 +51,22 @@ func serve(ot *frame.OtenkiFrame) error {
 		if err != nil {
 			return err
 		}
-		res := c.Response()
-		w := csv.NewWriter(res)
+		log.Printf("%+v",hw)
+		res := bytes.Buffer{}
+		w := csv.NewWriter(&res)
 		w.Write([]string{"Date", "Temperature", "WeatherId", "Weather", "Description"})
 
 		for _,v := range hw {
 			for _,l := range v.Weathers {
-				date:= strconv.Itoa(int(v.Date))
+				date:= time.Unix(int64(v.Date),0)
 				temp:= strconv.Itoa(int(v.Temperature))
 				wid:= strconv.Itoa(l.WeatherId)
-				w.Write([]string{date,temp,wid,l.Main,l.Description})
+				w.Write([]string{date.Format(time.RFC3339),temp,wid,l.Main,l.Description})
 			}
 		}
 		w.Flush()
 
-		return c.JSON(http.StatusOK,"Download Success")
+		return c.Blob(http.StatusOK,"text/csv",res.Bytes())
 	})
 
 	err := ot.Echo.Start(":8001")

@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"github.com/nachiguro1003/otenki/src/fetcher/app/entity"
 	"github.com/nachiguro1003/otenki/src/fetcher/frame"
 	"io/ioutil"
@@ -41,7 +42,8 @@ func FetchWeatherInfo(ot *frame.OtenkiFrame) error {
 		return err
 	}
 
-	for _,v := range hw.Hourly {
+	if err = d.Transaction(func(tx *gorm.DB) error {
+		v := hw.Hourly[len(hw.Hourly)-1]
 		if !entity.IsExistByDate(d, v.UnixTime) {
 			he := entity.NewHourly(v.UnixTime, v.Temperature)
 			if err := he.Create(d); err != nil {
@@ -49,21 +51,23 @@ func FetchWeatherInfo(ot *frame.OtenkiFrame) error {
 			}
 
 			for _, t := range v.Weather {
-				we := entity.NewWeather(t.Id, t.Main, t.Description,int(he.ID))
+				we := entity.NewWeather(t.Id, t.Main, t.Description, int(he.ID))
 				if err := we.Create(d); err != nil {
 					return err
 				}
 			}
 		}
+		return nil
+	}); err != nil {
+		return err
 	}
-
 
 	return nil
 }
 
 func (hw *HourlyWeatherInfoBinder) accessOpenWeatherAPI(ot *frame.OtenkiFrame) error {
 	ow := ot.Config.OpenWeatherApi
-	param := fmt.Sprintf("?lat=%s&lon=%s&appid=%s",ow.Latitude , ow.Longitude, ow.ApiKey)
+	param := fmt.Sprintf("?lat=%s&lon=%s&appid=%s", ow.Latitude, ow.Longitude, ow.ApiKey)
 	resp, err := client.Get(ow.Endpoint + param)
 	if err != nil {
 		return err

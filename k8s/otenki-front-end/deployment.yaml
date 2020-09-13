@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otenki-nginx
+  labels:
+    app: otenki-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otenki-nginx
+  template:
+    metadata:
+      labels:
+        app: otenki-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: gcr.io/otenki-289014/otenki-nginx
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              resources:
+          resources:
+            limits:
+              cpu: "1"
+            requests:
+              cpu: 50m
+
+

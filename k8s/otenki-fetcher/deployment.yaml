@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otenki-fetcher
+  labels:
+    app: otenki-fetcher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otenki-fetcher
+  template:
+    metadata:
+      labels:
+        app: otenki-fetcher
+    spec:
+      containers:
+        - name: otenki-fetcher
+          image: gcr.io/otenki-289014/otenki-fetcher:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: "1"
+            requests:
+              cpu: 50m
+
