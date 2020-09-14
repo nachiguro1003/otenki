@@ -16,7 +16,7 @@ import (
 
 func main() {
 	if err := run(); err != nil {
-		panic(err)
+		log.Printf("err = %s",err)
 	}
 }
 
@@ -36,6 +36,10 @@ func run() error {
 }
 
 func serve(ot *frame.OtenkiFrame) error {
+	ot.Echo.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK,"Hello world")
+	})
+
 	g := ot.Echo.Group("/batch")
 
 	// routingは少ないためserver開始に含めている。
@@ -51,7 +55,6 @@ func serve(ot *frame.OtenkiFrame) error {
 		if err != nil {
 			return err
 		}
-		log.Printf("%+v",hw)
 		res := bytes.Buffer{}
 		w := csv.NewWriter(&res)
 		w.Write([]string{"Date", "Temperature", "WeatherId", "Weather", "Description"})

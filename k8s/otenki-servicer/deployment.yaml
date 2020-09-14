@@ -5,7 +5,7 @@ metadata:
   labels:
     app: otenki-servicer
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: otenki-servicer

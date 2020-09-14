@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: otenki-migration
+spec:
+  template:
+    metadata:
+      name: otenki-migration
+      labels:
+        name: otenki-migration
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
+      restartPolicy: Never
+      containers:
+        - name: deploy-tasks-runner
+          image: gcr.io/otenki-289014/otenki-migration
+          command: ["goose", "up"]

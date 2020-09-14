@@ -4,12 +4,13 @@ import (
 	"github.com/labstack/echo"
 	"github.com/nachiguro1003/otenki/src/fetcher/app/api"
 	"github.com/nachiguro1003/otenki/src/fetcher/frame"
+	"log"
 	"net/http"
 )
 
 func main() {
 	if err := run(); err != nil {
-		panic(err)
+		log.Printf("err = %s",err)
 	}
 }
 
@@ -29,6 +30,9 @@ func run() error {
 }
 
 func serve(ot *frame.OtenkiFrame) error {
+	ot.Echo.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK,"Hello world")
+	})
 	g := ot.Echo.Group("/batch")
 
 	// routingは少ないためserver開始に含めている。

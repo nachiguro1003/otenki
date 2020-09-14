@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: otenki-postgres
+  labels:
+    app: otenki-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otenki-postgres
+  template:
+    metadata:
+      labels:
+        app: otenki-postgres
+    spec:
+      containers:
+        - image: postgres:9.6-alpine
+          name: otenki-postgres
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: otenki-postgres
+                  key: database_user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: otenki-postgres
+                  key: database_password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: otenki-postgres
+                  key: database_name
+          ports:
+            - containerPort: 5432
+              name: otenki-postgres
+          volumeMounts:
+            - name: postgresql-persistent-storage
+              mountPath: /var/lib/postgresql
+      volumes:
+        - name: postgresql-persistent-storage
+          gcePersistentDisk:
+            pdName: postgresql-disk
+            fsType: ext4

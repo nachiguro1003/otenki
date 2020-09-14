@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   fetcher-app:
-    build: ./docker/otenki-fetcher
+    build: docker/dev/otenki-fetcher
     depends_on:
       - db
     volumes:
@@ -10,7 +10,7 @@ services:
       - "8000:8000"
     command: tail -f /dev/null
   servicer-app:
-    build: ./docker/otenki-servicer
+    build: docker/dev/otenki-servicer
     depends_on:
       - db
     volumes:
@@ -41,7 +41,7 @@ services:
       - "8080:8080"
     command: tail -f /dev/null
   otenki-nginx:
-    build: ./docker/nginx
+    build: docker/dev/nginx
     links:
       - servicer-app
     ports:
