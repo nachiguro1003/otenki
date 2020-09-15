@@ -5,7 +5,7 @@ metadata:
   labels:
     app: otenki-servicer
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: otenki-servicer
@@ -17,6 +17,15 @@ spec:
       containers:
         - name: otenki-servicer
           image: gcr.io/otenki-289014/otenki-servicer
+          livenessProbe:
+            httpGet:
+              path: /batch/health_check
+              scheme: HTTP
+              port: 8001
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 10
           imagePullPolicy: Always
           ports:
             - containerPort: 8001
@@ -24,4 +33,4 @@ spec:
             limits:
               cpu: "1"
             requests:
-              cpu: 50m
+              cpu: 100m

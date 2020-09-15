@@ -7,7 +7,7 @@ COPY ./src/servicer/go.sum ./
 
 RUN go mod download
 
-COPY ./src/servicer/  .
+COPY ./src/servicer/  ./
 
 ARG CGO_ENABLED=0
 ARG GOOS=linux
@@ -16,6 +16,9 @@ RUN go build -o /go/bin/main -ldflags '-s -w'
 
 FROM scratch as runner
 
-COPY --from=builder /go/bin/main /app/main
+COPY --from=builder /go/src/github.com/nachiguro1003/otenki/src/servicer/env.yaml ./env.yaml
+COPY --from=builder /go/bin/main ./main
 
-ENTRYPOINT ["/app/main"]
+EXPOSE 8001
+
+ENTRYPOINT ["./main","./env.yaml"]
