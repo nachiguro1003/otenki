@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: otenki-postgresql
+  name: otenki-postgres
   labels:
-    app: otenki-postgresql
+    app: otenki-postgres
 spec:
   type: ClusterIP
   ports:
     - port: 5432
   selector:
-    app: otenki-postgresql
+    app: otenki-postgres

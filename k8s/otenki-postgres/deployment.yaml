@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: otenki-postgres
@@ -36,6 +36,11 @@ spec:
           ports:
             - containerPort: 5432
               name: otenki-postgres
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 300m
           volumeMounts:
             - name: postgresql-persistent-storage
               mountPath: /var/lib/postgresql

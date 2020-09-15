@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: otenki-app-ingress
@@ -8,5 +8,5 @@ spec:
         paths:
           - path: /*
             backend:
-              serviceName: otenki-app
+              serviceName: otenki-nginx
               servicePort: 80

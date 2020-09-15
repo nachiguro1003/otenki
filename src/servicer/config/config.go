@@ -3,12 +3,15 @@ package config
 import (
 	"github.com/go-yaml/yaml"
 	"io/ioutil"
+	"log"
+	"os"
 )
 
 func LoadConfigForYaml() (*Config, error) {
-	buf, err := ioutil.ReadFile("env.yaml")
+	filename := os.Args[1]
+	buf, err := ioutil.ReadFile(filename)
 	if err != nil {
-		panic(err)
+		log.Print(err)
 	}
 
 	var cfg Config
