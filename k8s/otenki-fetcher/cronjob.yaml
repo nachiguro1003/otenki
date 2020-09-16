@@ -14,5 +14,5 @@ spec:
               command: ["sh", "-c"]
               args:
                 - |
-                  http://otenki-fetcher:8000/batch/hourly_weather
+                  curl http://otenki-fetcher:8000/batch/hourly_weather
           restartPolicy: Never

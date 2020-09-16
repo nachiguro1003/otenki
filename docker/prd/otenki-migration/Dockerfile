@@ -1,7 +1,7 @@
 FROM gendosu/goose
 
-WORKDIR /go/src/github.com/nachiguro1003/otenki/db
+WORKDIR /go/src/github.com/nachiguro1003/otenki/
 
-COPY ./db/dbconf.yml ./
+COPY ./db ./db
 
 CMD ["/bin/true"]

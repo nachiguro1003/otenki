@@ -14,7 +14,7 @@ ARG GOOS=linux
 ARG GOARCH=amd64
 RUN go build -o /go/bin/main -ldflags '-s -w'
 
-FROM scratch as runner
+FROM alpine:3.7
 
 COPY --from=builder /go/src/github.com/nachiguro1003/otenki/src/servicer/env-prd.yaml ./env.yaml
 COPY --from=builder /go/bin/main ./main
