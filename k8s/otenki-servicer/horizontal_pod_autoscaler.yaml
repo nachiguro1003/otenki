@@ -1,0 +1,14 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: otenki-servicer-hpa
+  labels:
+    app: otenki-servicer
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: otenki-servicer
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70

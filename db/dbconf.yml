@@ -5,9 +5,9 @@ development:
   driver: postgres
   open: user=postgres dbname=otenki sslmode=disable host=otenki-postgres password=postgres
 
-production:
+local:
   driver: postgres
-  open: user=postgres dbname=otenki sslmode=disable host=otenki-postgres password=postgres
+  open: user=postgres dbname=otenki sslmode=disable host=db password=postgres
 
 environment_variable_config:
   driver: $DB_DRIVER

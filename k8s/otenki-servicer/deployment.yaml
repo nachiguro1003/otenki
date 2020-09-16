@@ -22,6 +22,14 @@ spec:
             - containerPort: 8001
           resources:
             limits:
-              cpu: 500
+              cpu: 700
+              memory: 300Mi
             requests:
-              cpu: 300
+              cpu: 500
+              memory: 200Mi
+          livenessProbe:
+            httpGet:
+              path: /batch/health_check
+              port: 8001
+            initialDelaySeconds: 30
+            timeoutSeconds: 30

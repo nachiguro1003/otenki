@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: otenki-fetcher
+spec:
+  schedule: "* */1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: otenki-fetcher
+              image: gcr.io/otenki-289014/otenki-fetcher:latest
+              command: ["sh", "-c"]
+              args:
+                - |
+                  http://otenki-fetcher:8000/batch/hourly_weather
+          restartPolicy: Never
