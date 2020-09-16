@@ -14,8 +14,8 @@
     1. `goose -env local up` でマイグレーションを実行
     1. `exit` でコンテナからでる
     1. 下記のコマンドでseedingを実行（順番をこの通りやること。PWはpostgres）
-    1. `psql -p 5432 -h localhost -d otenki -U postgres -c '\copy hourly_weather_infos from db/otenki.csv with csv header'`
-    1. `psql -p 5432 -h localhost -d otenki -U postgres -c ' \copy weathers from db/otenki-weather.csv with csv header'`
+    1. `psql -p 5432 -h localhost -d otenki -U postgres -c '\copy hourly_weather_infos(date,temperature,created_at,updated_at,deleted_at) from db/otenki.csv with csv header'`
+    1. `psql -p 5432 -h localhost -d otenki -U postgres -c ' \copy weathers(weather_id,main,description,hourly_weather_info_id,created_at,updated_at,deleted_at) from db/otenki-weather.csv with csv header'`
 
 1. fetcher-appの起動
 
