@@ -1,0 +1,9 @@
+enviromeenvironmentnt: "production"
+timezone: "Asia/Tokyo"
+
+postgres:
+  host: "otenki-postgres"
+  port: "5432"
+  user: "postgres"
+  db_name: "otenki"
+  password: "postgres"

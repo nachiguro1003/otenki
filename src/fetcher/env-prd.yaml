@@ -1,0 +1,17 @@
+environment: "production"
+
+timezone: "Asia/Tokyo"
+
+open_weather_api:
+  lang: "ja"
+  api_key: "b253c507227e58ee1cc5e3a440e5c6b4"
+  endpoint: "https://api.openweathermap.org/data/2.5/onecall"
+  latitude: "35.681236"
+  longitude: "139.767125"
+
+postgres:
+  host: "otenki-postgres"
+  port: "5432"
+  user: "postgres"
+  db_name: "otenki"
+  password: "postgres"
