@@ -16,7 +16,7 @@ RUN go build -o /go/bin/main -ldflags '-s -w'
 
 FROM scratch as runner
 
-COPY --from=builder /go/src/github.com/nachiguro1003/otenki/src/servicer/env.yaml ./env.yaml
+COPY --from=builder /go/src/github.com/nachiguro1003/otenki/src/servicer/env-prd.yaml ./env.yaml
 COPY --from=builder /go/bin/main ./main
 
 EXPOSE 8001
