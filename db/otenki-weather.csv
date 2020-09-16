@@ -47,4 +47,3 @@ weather_id,main,description,hourly_weather_info_id,created_at,updated_at,deleted
 804,Clouds,overcast clouds,46,2020-09-13 06:53:07.699826+00,2020-09-13 06:53:07.699826+00,
 804,Clouds,overcast clouds,47,2020-09-13 06:53:07.704846+00,2020-09-13 06:53:07.704846+00,
 804,Clouds,overcast clouds,48,2020-09-13 06:53:07.711854+00,2020-09-13 06:53:07.711854+00,
-500,Rain,light rain,53,2020-09-13 16:50:44.998111+00,2020-09-13 16:50:44.998111+00,

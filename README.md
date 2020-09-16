@@ -4,12 +4,12 @@
 
 1. このリポジトリをローカルにクローンします
 1. otenkiディレクトリへ移動
-1. `./src/fetcher/env.yaml`のapi_keyに`b253c507227e58ee1cc5e3a440e5c6b4`を追加
 1. docker-compose pull
 1. docker-compose up --build 
 * 以降の作業は別の窓を立ち上げて行なってください
 
 1. migrationの実行（スキーマ定義とseedのマイグレーション）
+    1. `psql -h localhost -U postgres -p 5432 -c 'CREATE DATABASE otenki'`を実行
     1. `docker-compose exec migration /bin/sh`
     1. `goose -env local up` でマイグレーションを実行
     1. `exit` でコンテナからでる
