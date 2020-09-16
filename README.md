@@ -1,13 +1,6 @@
 ローカル環境の構築とアプリケーションの実行手順：
  
-0. 
-golang
-
-docker
-
-git
-
-をinstallしてください
+0. golang / docker / git をinstallしてください
 
 1. このリポジトリをローカルにクローンします
 1. otenkiディレクトリへ移動
