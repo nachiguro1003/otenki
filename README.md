@@ -11,7 +11,8 @@
 0. migrationの実行（スキーマ定義とseedのマイグレーション）
     0. `docker-compose exec migration /bin/sh`
     0. `goose -env local up` でマイグレーションを実行
-    0. 下記のコマンドでseedingを実行（順番をこの通りやること）
+    0. `exit` でコンテナからでる
+    0. 下記のコマンドでseedingを実行（順番をこの通りやること。PWはpostgres）
     0. `psql -p 5432 -h localhost -d otenki -U postgres -c '\copy hourly_weather_infos from db/otenki.csv with csv header'`
     0. `psql -p 5432 -h localhost -d otenki -U postgres -c ' \copy weathers from db/otenki-weather.csv with csv header'`
 
@@ -32,3 +33,5 @@
 * ローカルDBへの接続:
 
     `psql -p 5432 -h localhost -d otenki -U postgres`
+    
+    PW: postgres
