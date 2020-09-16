@@ -1,7 +1,5 @@
 .idea/
 otenki.iml
 
-src/fetcher/env.yaml
 src/fetcher/tmp
-src/servicer/env.yaml
 src/servicer/tmp
