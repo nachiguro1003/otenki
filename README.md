@@ -40,7 +40,7 @@
 1. 気象情報の取得
 
     1. localhost:8000/batch/hourly_weather?from=hoge&to=fuga、unixtimeでfromからtoまでの時間の気象情報がCSV形式で吐き出されます。
-        `例： localhost:8000/batch/hourly_weather?from=1599976800&to=1600182000`
+        `例： localhost:8001/batch/hourly_weather?from=1599976800&to=1600182000`
 
 * ローカルDBへの接続:
 
